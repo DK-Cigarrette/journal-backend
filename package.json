@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "fetch": "babel-node fetchRemoteResource.js",
     "start": "nodemon src/app.js --exec babel-node",
     "build": "npm run clean && babel src -d dist && npm run copy:static",
     "copy:static": "cp -a src/views dist & cp -a src/public dist",
@@ -15,7 +16,9 @@
     "type": "git",
     "url": "git+https://github.com/DK-Cigarrette/journal-backend.git"
   },
-  "contributors": ["Jinwoo Jung <doublejnu@gmail.com> (https://github.com/jayjnu)"],
+  "contributors": [
+    "Jinwoo Jung <doublejnu@gmail.com> (https://github.com/jayjnu)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DK-Cigarrette/journal-backend/issues"
@@ -26,7 +29,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "morgan": "^1.7.0",
-    "pug": "^2.0.0-beta6"
+    "pug": "^2.0.0-beta6",
+    "request": "^2.79.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
