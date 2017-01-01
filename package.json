@@ -7,7 +7,7 @@
     "fetch": "babel-node fetchRemoteResource.js",
     "start": "nodemon src/app.js --exec babel-node",
     "build": "npm run clean && babel src -d dist && npm run copy:static",
-    "copy:static": "cp -a src/views dist & cp -a src/public dist",
+    "copy:static": "cp -a src/views dist & cp -a src/public dist & cp -a src/uploads dist",
     "serve": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist"
@@ -28,7 +28,9 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "mkdirp": "^0.5.1",
     "morgan": "^1.7.0",
+    "multer": "^1.2.1",
     "pug": "^2.0.0-beta6",
     "request": "^2.79.0"
   },

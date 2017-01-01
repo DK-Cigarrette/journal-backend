@@ -1,8 +1,13 @@
-import express, { Router } from 'express'
-const router = Router();
+import fs from 'fs'
 
-router.get('/', (req, res, get) => {
-    res.render('index');
-});
+const packageRouters = (app) => {
 
-export default router
+    fs.readdirSync(__dirname).forEach( (file) => {
+        if(file == 'index.js') return;
+        let fileName = file.slice(0, file.indexOf('.'));
+
+        require(`./${fileName}`).default(app);
+    } );
+};
+
+export default packageRouters;
