@@ -4,8 +4,19 @@ import routes from './routes'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import fallback from './modules/fallback'
+import { MongoClient } from 'mongodb'
 
-const port = process.env.PORT || 3000;
+const dbUrl = process.env.dbAuth || "";
+console.log(dbUrl);
+MongoClient.connect(dbUrl, (err, db) => {
+    if(err) throw new Error(err);
+    let col = db.collection('diary');
+    col.insert({hello: 'world'});
+    db.close();
+});
+
+
+const port = process.env.PORT || 5000;
 // get server instance
 const app = express();
 const server = http.createServer(app);
@@ -28,4 +39,4 @@ app.use(fallback('index'));
 // router
 routes(app);
 
-server.listen(port, ()=>console.log(`Server running on port ${port}`));
+server.listen(port, () => console.log(`Server running on port ${port}`));

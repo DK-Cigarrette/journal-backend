@@ -29,6 +29,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "mkdirp": "^0.5.1",
+    "mongodb": "^2.2.19",
     "morgan": "^1.7.0",
     "multer": "^1.2.1",
     "pug": "^2.0.0-beta6",
