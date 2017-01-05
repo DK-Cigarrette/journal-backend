@@ -1,0 +1,15 @@
+div#display
+    img.preview
+form(action="/writePosts" method="POST" enctype="multipart/form-data")
+    p
+        input#user(type="hidden" value="2017년 01월 05일 오후 8시 32분" name="createAt")
+    p
+        input#user(type="hidden" value="맑음" name="weather")
+    p
+        textarea#user(name="content")
+    p
+        input#user(type="hidden" value="scarlett.kim" name="username")
+    p
+        input#fileInput(type="file" name="imagePath")
+    p
+        input(type="submit" value="등록")
