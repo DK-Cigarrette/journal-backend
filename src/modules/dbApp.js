@@ -3,10 +3,6 @@
  */
 import { MongoClient } from 'mongodb'
 import EventEmitter from 'events'
-const dbPath = process.env.dbAuth;
-
-
-const collectionName = 'testGram';
 const evtNames = {
     connect: 'connection',
     error: 'error'
