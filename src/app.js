@@ -11,7 +11,7 @@ console.log(dbUrl);
 MongoClient.connect(dbUrl, (err, db) => {
     if(err) throw new Error(err);
     let col = db.collection('diary');
-    col.insert({hello: 'world'});
+    // col.find().toArray((err, arr)=>console.log(arr));
     db.close();
 });
 

@@ -19,15 +19,20 @@ function connectDB(req,res,next) {
         var paramContent = req.param("content");
         var paramImagePath = filePath;
         var paramUserName = req.param("username");
+        var pageType = req.param("pageType");
 
-        addPost(database, paramCreateAt, paramWeather, paramContent, paramImagePath, paramUserName, function(err, result) {
-            if(err) { throw err; }
-            if(result) {
-                console.log(result);
-            } else {
+        if(pageType && pageType == "update") {
+            updatePost(database, req);
+        } else {
+            addPost(database, paramCreateAt, paramWeather, paramContent, paramImagePath, paramUserName, function(err, result) {
+                if(err) { throw err; }
+                if(result) {
+                    console.log(result);
+                } else {
 
-            }
-        });
+                }
+            });
+        }
     });
 }
 
@@ -52,6 +57,21 @@ function addPost (database, createAt, weather, content, imagePath, username) {
             return;
         }
         console.log("게시판 데이터 추가함");
+        //callback(null,result);
+    });
+}
+
+function updatePost (database, req) {
+    let reqId = req.param('id');
+    let ObjectId = require('mongodb').ObjectId;
+    let oid = new ObjectId(reqId);
+    let posts = database.collection("testGram");
+    posts.updateOne({_id:oid},{"weather":req.param("weather"), "content":req.param("content"), "imagePath": filePath}).then(function (err, result) {
+        if(err) {
+            //callback(err,null);
+            return;
+        }
+        console.log("게시판 데이터 업데이트 완료");
         //callback(null,result);
     });
 }

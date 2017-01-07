@@ -4,18 +4,11 @@
 import multer from 'multer'
 import mkdirp from 'mkdirp'
 
-const makeImagePath = (username) => {
-    let date = new Date();
-    let yyyy = date.getFullYear();
-    let mm = date.getMonth() + 1;
-    let dd = date.getDate();
-    return `${__dirname}/../../uploads/${username}/images/${yyyy}/${mm}/${dd}`;
-};
 
 const storage = multer.diskStorage({
     destination(req, file, cb){
         let username = req.body.username;
-        let dirname = makeImagePath(username);
+        let dirname = `${__dirname}/../../uploads/${username}/images`;
 
         // make directory recursively on ENOENT
         mkdirp(dirname, (err) => {
@@ -25,7 +18,7 @@ const storage = multer.diskStorage({
     },
 
     filename(req, file, cb){
-        cb(null, `${Date.now()}`);
+        cb(null, `${file.fieldname}-${Date.now()}`);
     }
 });
 
