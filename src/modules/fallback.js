@@ -1,10 +1,15 @@
 /**
  * Created by zach on 2016. 12. 31..
  */
+import url from 'url'
+
 export default (template) => {
     return (req, res, next) => {
-        if((req.method === 'GET' || req.method === 'HEAD') && req.accepts('html')){
-            res.render(template);
+        let isApiCall = url.parse(req.url).path.indexOf('/api') === 0;
+        if((req.method === 'GET'|| req.method === 'HEAD') && req.accepts('html')){
+            if(!isApiCall){
+                res.render(template);
+            }
             next();
         }else{
             next();
