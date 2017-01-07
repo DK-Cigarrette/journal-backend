@@ -46,7 +46,7 @@ function connectDB(req,res,next) {
 
 function addPost (database, createAt, weather, content, imagePath, username) {
     var posts = database.collection("testGram");
-    posts.insert([{"createAt":createAt,"weather":weather, "content":content, "imagePath": imagePath, "username":username}], function (err, result) {
+    posts.insertOne({"createAt":createAt,"weather":weather, "content":content, "imagePath": imagePath, "username":username}).then(function (err, result) {
         if(err) {
             //callback(err,null);
             return;
