@@ -21,6 +21,8 @@ export default (app) => {
             let d = filterInvalidData(docs).map(each=>{
                 let imgSrc = each.imagePath || '';
                return {...each, imagePath: convertImgPath(imgSrc)}
+            }).sort((a, b) => {
+                return a._id < b._id;
             });
 
             console.log(d);
