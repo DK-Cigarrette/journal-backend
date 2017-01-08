@@ -1,7 +1,7 @@
 /**
  * Created by zach on 2017. 1. 7..
  */
-import { MongoClient } from 'mongodb'
+import mongodb, { MongoClient } from 'mongodb'
 import EventEmitter from 'events'
 const evtNames = {
     connect: 'connection',
@@ -12,7 +12,7 @@ class DB extends EventEmitter {
     constructor(dbPath){
         super();
         this.dbPath = dbPath;
-
+        this.mongodb = mongodb;
         console.log(dbPath);
     }
 
@@ -72,8 +72,12 @@ class DB extends EventEmitter {
         return db.then((col) => {
             let method = all ? col.deleteMany : col.deleteOne;
             let result = method.call(col, arg, opt);
-            console.log('[DB RESULT: DELETE] ', result);
+            return result;
+        }).then(result => {
+            console.log('[DB RESULT: DELETE]', result.result);
             return this;
+        }).catch(reason => {
+            console.error('[DB ERROR: DELETE]', reason);
         });
     }
 
