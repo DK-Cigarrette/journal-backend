@@ -17,6 +17,14 @@ const updateJournal = (app) => {
                 console.log(data);
                 res.send(data);
             });
+
+/*
+            col.find().toArray(function(error, data) {
+                if (err) throw error;
+                console.log(data);
+                res.send(data);
+            });
+*/
             db.close();
         });
     });

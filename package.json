@@ -34,6 +34,9 @@
     "morgan": "^1.7.0",
     "multer": "^1.2.1",
     "pug": "^2.0.0-beta6",
+    "react": "^15.2.1",
+    "react-native": "^0.31.0",
+    "react-native-kakao-login": "^1.0.1",
     "request": "^2.79.0"
   },
   "devDependencies": {
