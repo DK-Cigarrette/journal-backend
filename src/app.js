@@ -8,7 +8,7 @@ import cors from 'cors'
 
 const dbUrl = process.env.dbAuth || "";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || (process.env.PORT = 3000);
 // get server instance
 const app = express();
 const server = http.createServer(app);
@@ -21,6 +21,7 @@ app.set('views', `${__dirname}/views`);
 //cors
 app.use(cors());
 // serve static
+app.use('/uploads', express.static(`${__dirname}/../uploads`));
 app.use(express.static(`${__dirname}/public`));
 // logger
 app.use(morgan('combined'));

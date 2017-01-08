@@ -3,6 +3,7 @@
  */
 import dbApp from '../modules/dbApp'
 import convertImgPath  from '../modules/convertImgPath'
+import deleteImage from '../modules/deleteImage'
 
 let collection = new dbApp(process.env.dbAuth).connect('testGram');
 
@@ -31,9 +32,12 @@ export default (app) => {
         let cardId = req.query._id || '';
         console.log(req.query);
         if(cardId.length > 0){
-            collection.delete({_id:collection.mongodb.ObjectID(cardId)}).then(()=>{
-                res.sendStatus(200);
-            }).catch(err => res.send(err));
+            collection
+                .delete({_id:collection.mongodb.ObjectID(cardId)})
+                .then(()=>{
+                    res.sendStatus(200);
+                })
+                .catch(err => res.send(err));
         }else{
             res.sendStatus(500);
         }

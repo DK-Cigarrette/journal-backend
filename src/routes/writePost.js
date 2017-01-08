@@ -97,14 +97,13 @@ const storage = multer.diskStorage({
     },
 
     filename(req, file, cb){
-        let date=`${Date.now()}.png`;
+        let date=`/${Date.now()}.png`;
         filePath=dirname+date;
         cb(null, date);
     }
 });
 
 const upload = multer({storage: storage});
-
 const writePost = (app) => {
 
     app.post('/writePosts', upload.single('imagePath'), function (req, res, next) {
