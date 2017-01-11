@@ -8,7 +8,7 @@ import cors from 'cors'
 
 const dbUrl = process.env.dbAuth || "";
 
-const port = process.env.PORT || (process.env.PORT = 3000);
+const port = process.env.PORT||5001;
 // get server instance
 const app = express();
 const server = http.createServer(app);
