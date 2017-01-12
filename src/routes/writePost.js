@@ -66,7 +66,7 @@ function updatePost (database, req) {
     let ObjectId = require('mongodb').ObjectId;
     let oid = new ObjectId(reqId);
     let posts = database.collection("testGram");
-    posts.updateOne({_id:oid},{"weather":req.param("weather"), "content":req.param("content"), "imagePath": filePath}).then(function (err, result) {
+    posts.updateOne({_id:oid},{"weather":req.param("weather"), "content":req.param("content"), "imagePath": filePath, "username":"111111111"}).then(function (err, result) {
         if(err) {
             //callback(err,null);
             return;

@@ -24,8 +24,6 @@ export default (app) => {
             }).sort((a, b) => {
                 return a._id < b._id;
             });
-
-            console.log(d);
             res.send(d);
         });
     });
