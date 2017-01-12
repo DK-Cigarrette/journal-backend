@@ -4,7 +4,8 @@ const updateJournal = (app) => {
 
     //POST localhost:5000/editJournal?id=587064712736323e86d0a423
     app.post('/editJournal', (req, res, next) => {
-        let reqId = req.param('id');
+        let reqId = req.query._id;
+        console.log(req.query);
         let ObjectId = require('mongodb').ObjectId;
         let oid = new ObjectId(reqId);
 
@@ -16,6 +17,7 @@ const updateJournal = (app) => {
                 if (err) throw error;
                 console.log(data);
                 res.send(data);
+                db.close();
             });
 
 /*
@@ -25,7 +27,7 @@ const updateJournal = (app) => {
                 res.send(data);
             });
 */
-            db.close();
+
         });
     });
 };

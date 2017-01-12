@@ -9,4 +9,4 @@ const convertImgPath = (path) => {
     return `http://${getHostAddr()[0]}:${process.env.PORT}/${n}`;
 };
 
-export default convertImgPathconvertImgPath
+export default convertImgPath

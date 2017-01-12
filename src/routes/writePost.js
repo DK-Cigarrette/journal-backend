@@ -4,34 +4,28 @@ import multer from 'multer';
 import mkdirp from 'mkdirp';
 
 
-var database;
-var filePath;
-var dirname;
+let database;
+let filePath;
+let dirname;
 
 function connectDB(req,res,next) {
-    var databaseUrl=process.env.dbAuth;
+    let databaseUrl = process.env.dbAuth;
     mongodb.connect(databaseUrl,function(err,db) {
         if(err) throw err;
-        console.log('데이터베이스에 연결되었습니다'+databaseUrl);
+        console.log('데이터베이스에 연결되었습니다' + databaseUrl);
         database=db;
-        var paramCreateAt = req.param("createAt");
-        var paramWeather = req.param("weather");
-        var paramContent = req.param("content");
-        var paramImagePath = filePath;
-        var paramUserName = req.param("username");
-        var pageType = req.param("pageType");
+        let params = req.body;
+        let paramCreateAt = params.createAt;
+        let paramWeather = params.weather;
+        let paramContent = params.content;
+        let paramImagePath = filePath;
+        let paramUserName = params.username;
+        let pageType = params.pageType;
 
         if(pageType && pageType == "update") {
             updatePost(database, req);
         } else {
-            addPost(database, paramCreateAt, paramWeather, paramContent, paramImagePath, paramUserName, function(err, result) {
-                if(err) { throw err; }
-                if(result) {
-                    console.log(result);
-                } else {
-
-                }
-            });
+            addPost(database, paramCreateAt, paramWeather, paramContent, paramImagePath, paramUserName, req, res);
         }
     });
 }
@@ -49,16 +43,10 @@ function connectDB(req,res,next) {
 //     .then()
 
 
-function addPost (database, createAt, weather, content, imagePath, username) {
-    var posts = database.collection("testGram");
-    posts.insertOne({"createAt":createAt,"weather":weather, "content":content, "imagePath": imagePath, "username":username}).then(function (err, result) {
-        if(err) {
-            //callback(err,null);
-            return;
-        }
-        console.log("게시판 데이터 추가함");
-        //callback(null,result);
-    });
+function addPost (database, createAt, weather, content, imagePath, username, req, res) {
+    let posts = database.collection("testGram");
+    posts.insertOne({"createAt":createAt,"weather":weather, "content":content, "imagePath": imagePath, "username":username});
+    res.sendStatus(200);
 }
 
 function updatePost (database, req) {
@@ -107,7 +95,6 @@ const upload = multer({storage: storage});
 const writePost = (app) => {
 
     app.post('/writePosts', upload.single('imagePath'), function (req, res, next) {
-        res.send(req.file);
          connectDB(req,res,next);
     });
 
